@@ -6,6 +6,14 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Deck Builder — ShadowDeck™</title>
+<meta name="description" content="Use the ShadowDeck™ Deck Builder to configure your nail-free timber deck and get an instant indicative materials estimate.">
+<link rel="canonical" href="https://shadowdeck.co.nz/quote.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="ShadowDeck™ Deck Builder — Instant Estimate">
+<meta property="og:description" content="Use the ShadowDeck™ Deck Builder to configure your nail-free timber deck and get an instant indicative materials estimate.">
+<meta property="og:url" content="https://shadowdeck.co.nz/quote.html">
+<meta property="og:site_name" content="ShadowDeck">
+<meta name="twitter:card" content="summary">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -28,22 +36,49 @@
 }
 body{font-family:var(--font);background:var(--off-white);color:var(--text);min-height:100vh}
 
-/* NAV */
-nav{background:#1a1a1a;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:70px;position:sticky;top:0;z-index:100}
-.nav-logo{display:flex;flex-direction:column;line-height:1}
-.nav-logo span:first-child{font-family:var(--font-condensed);font-size:22px;font-weight:700;color:#fff;letter-spacing:0.02em}
-.nav-logo span:last-child{font-size:10px;color:rgba(255,255,255,0.6);letter-spacing:0.08em;text-transform:uppercase}
-.nav-links{display:flex;gap:1.5rem;align-items:center}
-.nav-links a{color:rgba(255,255,255,0.8);text-decoration:none;font-size:14px;font-weight:500;transition:color 0.2s}
-.nav-links a:hover{color:#fff}
-.nav-cta{background:var(--gold);color:#8a6a20!important;padding:8px 16px;border-radius:4px;font-weight:600!important}
-.nav-phone{color:rgba(255,255,255,0.7);font-size:13px}
-.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
-.hamburger span{width:24px;height:2px;background:#fff;border-radius:2px;transition:0.3s}
-.mobile-menu{display:none;position:absolute;top:70px;left:0;right:0;background:#1a1a1a;padding:1rem 2rem;flex-direction:column;gap:0.75rem}
-.mobile-menu.open{display:flex}
-.mobile-menu a{color:rgba(255,255,255,0.85);text-decoration:none;font-size:15px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.1)}
-
+/* nav */
+header{position:sticky;top:0;z-index:1000;background:var(--ink-2)}
+.topbar-upper{border-bottom:1px solid rgba(255,255,255,.12)}.topbar-upper-inner{display:flex;align-items:center;justify-content:flex-end;padding:7px 24px;gap:20px;max-width:1200px;margin:0 auto}
+.topbar-upper a{color:rgba(255,255,255,.85);font-family:'Barlow Condensed',sans-serif;font-weight:500;font-size:.92rem;letter-spacing:.6px;transition:.2s;text-decoration:none;white-space:nowrap}
+.topbar-upper a:hover{color:#c8a84b}
+.topbar-upper .sep{color:rgba(255,255,255,.35);font-size:.9rem}
+.btn-deck{border:2px solid #c8a84b;color:#c8a84b;background:transparent;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.92rem;letter-spacing:1.5px;text-transform:uppercase;padding:7px 22px;border-radius:3px;cursor:pointer;transition:.2s;text-decoration:none;white-space:nowrap;display:inline-block}
+.btn-deck:hover{background:#c8a84b;color:#1a1a1a;text-decoration:none}
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:10px 24px;gap:16px;max-width:1200px;margin:0 auto}
+.brand{display:flex;flex-direction:column;line-height:1;flex-shrink:0;text-decoration:none}
+.brand img{height:28px;width:auto}
+.brand .logo-txt{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.7rem;color:#fff;letter-spacing:1px}
+.brand small{color:#fff;font-size:.58rem;letter-spacing:1.2px;text-transform:uppercase;margin-top:2px;display:block;white-space:nowrap;line-height:1.2}
+nav{flex:1;display:flex;justify-content:flex-end}
+nav>ul{list-style:none;display:flex;gap:2px;align-items:center;margin:0;padding:0}
+nav a{color:#e8dfc0;font-family:'Barlow Condensed',sans-serif;font-weight:500;text-transform:uppercase;letter-spacing:.8px;font-size:.95rem;transition:.2s;padding:8px 12px;border-bottom:2px solid transparent;white-space:nowrap;display:block;text-decoration:none}
+nav a:hover,nav a.active{color:#fff;border-bottom-color:#c8a84b}
+.has-drop{position:relative}
+.has-drop>a::after{content:' v';font-size:.7rem;opacity:.6}
+.drop{display:none;position:absolute;top:calc(100% + 4px);left:0;background:#0d2420;border:1px solid rgba(255,255,255,.12);border-radius:4px;min-width:230px;padding:6px 0;z-index:300;box-shadow:0 8px 28px rgba(0,0,0,.35)}
+.has-drop:hover .drop{display:block}
+.drop li{list-style:none}
+.drop a{padding:10px 20px;font-size:.88rem;letter-spacing:.5px;border-bottom:none;color:#d4c090;text-transform:none;font-weight:400}
+.drop a:hover{background:rgba(255,255,255,.07);color:#fff;border-bottom:none}
+.drop a.disabled{opacity:.38;pointer-events:none;cursor:not-allowed;font-style:italic}
+.burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px}
+.burger span{width:26px;height:2px;background:#fff;transition:.3s}
+@media(max-width:960px){
+  .topbar-upper .sep{display:none}
+  .topbar-upper a:not(.btn-deck){display:none}
+  nav>ul{display:none;position:absolute;top:100%;left:0;right:0;background:#0d2420;flex-direction:column;gap:0;padding:8px 0;border-top:1px solid rgba(255,255,255,.1)}
+  nav>ul.open{display:flex}
+  nav{justify-content:flex-end}
+  nav li{width:100%}
+  nav>ul>li>a{display:block;padding:13px 20px;border-bottom:1px solid rgba(255,255,255,.07)}
+  .has-drop>a::after{float:right}
+  .drop{display:none;position:static;background:rgba(0,0,0,.25);border:none;border-radius:0;box-shadow:none;padding:0;min-width:unset}
+  .has-drop.mob-open .drop{display:block}
+  .drop a{padding:11px 34px;font-size:.88rem;border-bottom:1px solid rgba(255,255,255,.05)}
+  .burger{display:flex}
+  h2.title{font-size:2rem}
+  footer .cols{grid-template-columns:1fr;gap:24px}
+}
 /* HERO */
 .page-hero{background:#1a1a1a;padding:3rem 2rem 2.5rem;text-align:center}
 .page-hero h1{font-family:var(--font-condensed);font-size:42px;font-weight:700;color:#fff;letter-spacing:0.02em;margin-bottom:8px}
@@ -213,34 +248,49 @@ footer a{color:rgba(255,255,255,0.7);text-decoration:none}
 </head>
 <body>
 
-<nav>
-  <a href="index.html" class="nav-logo">
-    <span>ShadowDeck™</span>
-    <span>Nail free timber decking system</span>
+<header>
+<div class="topbar-upper"><div class="topbar-upper-inner">
+  <a href="tel:0800742369">&#128222;&nbsp;0800 742 369</a>
+  <span class="sep">|</span>
+  <a href="mailto:info@shadowdeck.co.nz">info@shadowdeck.co.nz</a>
+  <span class="sep">|</span>
+  <a href="quote.html" class="btn-deck" style="color:#c8a84b">Deck Builder</a>
+</div></div>
+<div class="topbar">
+  <a href="index.html" class="brand">
+    <img src="images/shadowdeck-logo-white.png" alt="ShadowDeck" style="height:22px;width:auto;image-rendering:-webkit-optimize-contrast" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+    <span class="logo-txt" style="display:none">ShadowDeck</span>
+    <small>Nail Free Timber Decking System</small>
   </a>
-  <div class="nav-links">
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="products.html">Our Products</a>
-    <a href="frame.html">Aluminium Framing</a>
-    <a href="installation-guide.html">Installation Guide</a>
-    <a href="contact.html">Contact Us</a>
-    <a href="quote.html" class="nav-cta">Deck Builder</a>
-  </div>
-  <div class="nav-phone">0800 742 369</div>
-  <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
-</nav>
-<div class="mobile-menu" id="mobileMenu">
-  <a href="index.html">Home</a>
-  <a href="about.html">About</a>
-  <a href="products.html">Our Products</a>
-  <a href="frame.html">Aluminium Framing</a>
-  <a href="installation-guide.html">Installation Guide</a>
-  <a href="contact.html">Contact Us</a>
-  <a href="quote.html">Deck Builder</a>
+  <nav>
+    <button class="burger" aria-label="Menu" onclick="toggleMobileMenu()">
+      <span></span><span></span><span></span>
+    </button>
+    <ul id="m">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html" >About</a></li>
+      <li class="has-drop">
+        <a href="products.html" >Products</a>
+        <ul class="drop">
+          <li><a href="products.html">Nail-Free Timber Decking</a></li>
+          <li><a href="frame.html">Aluminium Sub-Framing</a></li>
+        </ul>
+      </li>
+      <li class="has-drop">
+        <a href="javascript:void(0)" >Resources</a>
+        <ul class="drop">
+          <li><a href="projects.html">Recent Projects</a></li>
+          <li><a href="installation-guide.html">Timber Decking Guide</a></li>
+          <li><a href="javascript:void(0)" class="disabled">Aluminium Guide <em>(coming soon)</em></a></li>
+          <li><a href="span-tables.html">SuperSpan Span Tables</a></li>
+          <li><a href="ps1-certificate.html">PS1 Engineering Certificate</a></li>
+        </ul>
+      </li>
+      <li><a href="contact.html" >Contact</a></li>
+    </ul>
+  </nav>
 </div>
+</header>
 
 <div class="page-hero">
   <div class="badge">Instant estimate</div>
@@ -660,9 +710,12 @@ window.SPANS = {
 // ============================================================
 // NAV
 // ============================================================
-function toggleMenu(){
-  document.getElementById('mobileMenu').classList.toggle('open');
-}
+
+document.querySelectorAll(".has-drop > a").forEach(function(a){
+  a.addEventListener("click",function(e){
+    if(window.innerWidth<=960){e.preventDefault();this.parentElement.classList.toggle("mob-open");}
+  });
+});
 
 // ============================================================
 // STEP NAVIGATION

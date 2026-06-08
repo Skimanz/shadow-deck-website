@@ -6,7 +6,14 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ShadowDeck<sup class="tm">™</sup> | Nail-Free Timber Decking System</title>
-<meta name="description" content="ShadowDeck - Nail-Free Timber Decking System. Pre-grooved Kwila timber and hidden fasteners for a sleek, splinter-free, long-lasting deck. BRANZ Appraised.">
+<meta name="description" content="ShadowDeck - Nail-Free Timber Decking System. Pre-grooved Kwila timber and hidden fasteners for a sleek, splinter-free, long-lasting deck. BRANZ Appraised."
+<link rel="canonical" href="https://shadowdeck.co.nz/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="ShadowDeck™ — Nail Free Timber Decking System">
+<meta property="og:description" content="ShadowDeck - Nail-Free Timber Decking System. Pre-grooved Kwila timber and hidden fasteners for a sleek, splinter-free, long-lasting deck. BRANZ Appraised.">
+<meta property="og:url" content="https://shadowdeck.co.nz/">
+<meta property="og:site_name" content="ShadowDeck">
+<meta name="twitter:card" content="summary">>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 /* ===== ShadowDeck shared styles ===== */
@@ -246,7 +253,7 @@ footer .copy{border-top:1px solid rgba(255,255,255,.1);padding-top:22px;text-ali
       <h2 class="title">How ShadowDeck<sup class="tm">™</sup> Works</h2>
     </div>
     <div class="reveal video-wrap">
-      <div class="yt-lazy" data-id="mxXAffIEglU" style="position:relative;width:100%;padding-bottom:56.25%;cursor:pointer;background:#000;border-radius:4px;overflow:hidden"><img src="https://img.youtube.com/vi/mxXAffIEglU/maxresdefault.jpg" alt="Play ShadowDeck video" style="width:100%;height:100%;object-fit:cover;position:absolute;opacity:.85"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center"><div style="width:72px;height:72px;background:rgba(200,168,75,.9);border-radius:50%;display:flex;align-items:center;justify-content:center"><div style="width:0;height:0;border-top:14px solid transparent;border-bottom:14px solid transparent;border-left:22px solid #fff;margin-left:5px"></div></div></div></div>
+      <div class="yt-lazy" data-id="mxXAffIEglU" style="position:relative;width:100%;padding-bottom:56.25%;cursor:pointer;background:#000;border-radius:4px;overflow:hidden"><img src="https://img.youtube.com/vi/mxXAffIEglU/maxresdefault.jpg" alt="Play ShadowDeck video" loading="lazy" style="width:100%;height:100%;object-fit:cover;position:absolute;opacity:.85"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center"><div style="width:72px;height:72px;background:rgba(200,168,75,.9);border-radius:50%;display:flex;align-items:center;justify-content:center"><div style="width:0;height:0;border-top:14px solid transparent;border-bottom:14px solid transparent;border-left:22px solid #fff;margin-left:5px"></div></div></div></div>
     </div>
   </div>
 </section>
@@ -334,6 +341,14 @@ function go(n){sl[i].classList.remove('show');dt[i].classList.remove('on');i=(n+
 dt.forEach((b,n)=>b.onclick=()=>go(n));
 setInterval(()=>go(i+1),5500);
 document.querySelectorAll('.yt-lazy').forEach(function(el){el.addEventListener('click',function(){var id=el.dataset.id;el.innerHTML='<iframe style="position:absolute;inset:0;width:100%;height:100%;border:0" src="https://www.youtube.com/embed/'+id+'?autoplay=1" allowfullscreen allow="autoplay"></iframe>';});});
+</script>
+<script>
+function toggleMobileMenu(){document.getElementById("m").classList.toggle("open");}
+document.querySelectorAll(".has-drop > a").forEach(function(a){
+  a.addEventListener("click",function(e){
+    if(window.innerWidth<=960){e.preventDefault();this.parentElement.classList.toggle("mob-open");}
+  });
+});
 </script>
 </body>
 </html>
