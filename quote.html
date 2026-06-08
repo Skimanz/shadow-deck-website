@@ -65,7 +65,17 @@ nav{background:#1a1a1a;padding:0 2rem;display:flex;align-items:center;justify-co
 .prog-step.done .prog-label{color:#c8a84b}
 
 /* MAIN CONTENT */
-.builder-wrap{max-width:900px;margin:0 auto;padding:2rem 1.5rem 4rem}
+.builder-outer{max-width:1300px;margin:0 auto;padding:2rem 1.5rem 4rem;display:grid;grid-template-columns:1fr 380px;gap:2rem;align-items:start}
+.builder-wrap{min-width:0}
+.deck-preview{position:sticky;top:90px}
+.preview-card{background:#fff;border:1px solid var(--border);border-radius:10px;overflow:hidden}
+.preview-card-header{background:#1a1a1a;padding:10px 16px;font-family:var(--font-condensed);font-size:13px;font-weight:600;color:#fff;letter-spacing:.5px;text-transform:uppercase;display:flex;justify-content:space-between;align-items:center}
+.preview-card-header span{color:rgba(255,255,255,.5);font-size:11px;font-weight:400;letter-spacing:.3px;text-transform:none}
+#deckSVG{width:100%;display:block;background:#f8f9f7}
+.preview-legend{padding:10px 14px;display:flex;flex-wrap:wrap;gap:8px;border-top:1px solid var(--border)}
+.leg-item{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--text-muted)}
+.leg-swatch{width:14px;height:14px;border-radius:2px;flex-shrink:0}
+.preview-dims{padding:10px 14px;border-top:1px solid var(--border);font-size:12px;color:var(--text-muted);display:flex;justify-content:space-between}
 .step-panel{display:none}
 .step-panel.active{display:block}
 .step-title{font-family:var(--font-condensed);font-size:28px;font-weight:700;color:#8a6a20;margin-bottom:6px;letter-spacing:0.01em}
@@ -189,13 +199,13 @@ footer a{color:rgba(255,255,255,0.7);text-decoration:none}
 
 /* PRINT */
 @media print{nav,footer,.nav-btns,.cta-grid,.quote-form,.progress-wrap,.page-hero{display:none}
-.builder-wrap{padding:0}.results-hero{background:#1a1a1a!important;-webkit-print-color-adjust:exact}}
+.builder-outer{padding:0}.results-hero{background:#1a1a1a!important;-webkit-print-color-adjust:exact}}
 
 @media(max-width:768px){
   .hamburger{display:flex}
   .nav-links,.nav-phone{display:none}
   .page-hero h1{font-size:32px}
-  .builder-wrap{padding:1.5rem 1rem 3rem}
+  .builder-outer{grid-template-columns:1fr;padding:1.5rem 1rem 3rem}.deck-preview{position:static}
   .prog-label{display:none}
   .prog-num{width:22px;height:22px;font-size:11px}
 }
@@ -267,6 +277,7 @@ footer a{color:rgba(255,255,255,0.7);text-decoration:none}
   </div>
 </div>
 
+<div class="builder-outer">
 <div class="builder-wrap">
 
   <!-- STEP 1: DIMENSIONS -->
@@ -558,6 +569,31 @@ footer a{color:rgba(255,255,255,0.7);text-decoration:none}
 
 </div><!-- end builder-wrap -->
 
+<div class="deck-preview" id="deckPreview">
+  <div class="preview-card">
+    <div class="preview-card-header">
+      Deck Plan <span id="previewLabel">Enter dimensions to start</span>
+    </div>
+    <svg id="deckSVG" viewBox="0 0 360 280" xmlns="http://www.w3.org/2000/svg">
+      <text x="180" y="140" text-anchor="middle" font-family="Barlow,sans-serif" font-size="13" fill="#aaa">Enter dimensions above</text>
+    </svg>
+    <div class="preview-legend" id="previewLegend" style="display:none">
+      <div class="leg-item"><div class="leg-swatch" style="background:#c8a84b20;border:1.5px solid #c8a84b"></div>Deck area</div>
+      <div class="leg-item" id="leg-joists" style="display:none"><div class="leg-swatch" style="background:transparent;border:1px dashed #3d8a7d"></div>Joists</div>
+      <div class="leg-item" id="leg-bearers" style="display:none"><div class="leg-swatch" style="background:transparent;border:1.5px dashed #1a5c52"></div>Bearers</div>
+      <div class="leg-item" id="leg-boards" style="display:none"><div class="leg-swatch" style="background:#c8a84b50"></div>Decking</div>
+      <div class="leg-item" id="leg-frame" style="display:none"><div class="leg-swatch" style="background:#8a6a20;border:1px solid #8a6a20"></div>Picture frame</div>
+      <div class="leg-item" id="leg-stairs" style="display:none"><div class="leg-swatch" style="background:#ddd;border:1px solid #aaa"></div>Stairs</div>
+    </div>
+    <div class="preview-dims" id="previewDims" style="display:none">
+      <span id="dimLabel">—</span>
+      <span id="areaLabel">—</span>
+    </div>
+  </div>
+</div>
+
+</div><!-- end builder-outer -->
+
 <footer>
 <div class="footer-inner">
   <p>© 2026 Robust Limited. All rights reserved. | <a href="contact.html">Contact Us</a> | <a href="index.html">Home</a></p>
@@ -609,7 +645,7 @@ const P = {
 
 // Span table data (PS1 certified, 2.5kPa residential, continuous span)
 // joist-only span in metres (continuous), bearer span in metres (continuous)
-const SPANS = {
+window.SPANS = {
   superspan: {
     '30': { joistSpan: 1.05, bearerSpan: 4.39 },
     '60': { joistSpan: 1.89, bearerSpan: 3.70 },
@@ -695,6 +731,7 @@ function updateArea(){
     d.style.display='block';
     state.length=l;state.width=w;state.area=parseFloat(a);
   } else {d.style.display='none';}
+  updatePreview();
 }
 
 // ============================================================
@@ -711,6 +748,7 @@ function selectOption(group,val,el){
     document.getElementById('nurajack-info').style.display=val==='nurajack'?'block':'none';
     document.getElementById('timber-info').style.display=val==='timber'?'block':'none';
   }
+  updatePreview();
 }
 
 // ============================================================
@@ -745,6 +783,7 @@ function selectFraming(val,el){
     });
     ls.style.display='none';
   }
+  updatePreview();
 }
 
 function selectProfile(val,el){
@@ -753,6 +792,7 @@ function selectProfile(val,el){
   state.framingProfile=val;
   document.getElementById('layout-section').style.display='block';
   document.getElementById('layout-info').style.display='none';
+  updatePreview();
 }
 
 function selectLayout(val,el){
@@ -761,7 +801,7 @@ function selectLayout(val,el){
   state.framingLayout=val;
   const info=document.getElementById('layout-info');
   info.style.display='block';
-  const spans=SPANS[state.framing]?.[state.framingProfile];
+  const spans=window.SPANS[state.framing]?.[state.framingProfile];
   if(spans){
     if(val==='joist'){
       info.innerHTML=`<strong>Joist only:</strong> ${state.framingProfile}×60mm joists span up to ${spans.joistSpan*1000}mm between supports. Joists at 450mm centres. More Nurajack pedestals but lower overall profile height.`;
@@ -769,6 +809,7 @@ function selectLayout(val,el){
       info.innerHTML=`<strong>Bearer + joist:</strong> Bearers span up to ${spans.bearerSpan*1000}mm between Nurajacks. Joists sit on bearers at 450mm centres. Significantly fewer pedestals but adds the bearer profile height.`;
     }
   }
+  updatePreview();
 }
 
 // ============================================================
@@ -785,6 +826,7 @@ function selectPictureFrame(val,el){
   state.pictureFrame=val;
   const pp=document.getElementById('pf-profile-section');
   pp.style.display=(val==='three'||val==='four')?'block':'none';
+  updatePreview();
 }
 
 function selectPFProfile(val,el){
@@ -801,6 +843,7 @@ function selectToggle(stateKey,val,yesId,noId){
   if(stateKey==='housespacer'){
     document.getElementById('hs-info').style.display=val==='yes'?'block':'none';
   }
+  updatePreview();
 }
 
 function toggleStairs(show){
@@ -810,6 +853,7 @@ function toggleStairs(show){
 function changeSteps(d){
   state.stepsCount=Math.max(1,Math.min(10,state.stepsCount+d));
   document.getElementById('stepsVal').textContent=state.stepsCount;
+  updatePreview();
 }
 
 function selectStairProfile(val,yesId,noId){
@@ -835,7 +879,7 @@ function buildResults(){
   let framingItems=[];
   let nurajackCount=0;
   if(state.framing!=='timber'){
-    const spans=SPANS[state.framing]?.[state.framingProfile]||{joistSpan:1.0,bearerSpan:2.0};
+    const spans=window.SPANS[state.framing]?.[state.framingProfile]||{joistSpan:1.0,bearerSpan:2.0};
     const priceKey=state.framing==='econospan'?`econospan_${state.framingProfile}`:`superspan_${state.framingProfile}`;
     const lmRate=P[priceKey]||0;
     const joistRows=Math.ceil(W/0.45)+2;
@@ -1033,6 +1077,203 @@ document.querySelectorAll(".has-drop > a").forEach(function(a){
     if(window.innerWidth<=960){e.preventDefault();this.parentElement.classList.toggle("mob-open");}
   });
 });
+
+// ============================================================
+// DECK PLAN SVG PREVIEW
+// ============================================================
+const SVG_W = 360, SVG_H = 280;
+const PAD = 30; // padding inside SVG
+
+function ns(tag, attrs={}) {
+  const el = document.createElementNS('http://www.w3.org/2000/svg', tag);
+  Object.entries(attrs).forEach(([k,v]) => el.setAttribute(k, v));
+  return el;
+}
+
+function updatePreview() {
+  const svg = document.getElementById('deckSVG');
+  const L = state.length, W = state.width;
+  svg.innerHTML = '';
+
+  if (!L || !W || L <= 0 || W <= 0) {
+    const t = ns('text', {x:180, y:140, 'text-anchor':'middle', 'font-family':'Barlow,sans-serif', 'font-size':'13', fill:'#aaa'});
+    t.textContent = 'Enter dimensions above';
+    svg.appendChild(t);
+    document.getElementById('previewLabel').textContent = 'Enter dimensions to start';
+    document.getElementById('previewLegend').style.display = 'none';
+    document.getElementById('previewDims').style.display = 'none';
+    return;
+  }
+
+  // Scale deck to fit SVG with padding
+  const drawW = SVG_W - PAD * 2;
+  const drawH = SVG_H - PAD * 2 - 20; // extra for labels
+  const scaleX = drawW / L;
+  const scaleY = drawH / W;
+  const scale = Math.min(scaleX, scaleY);
+  const dW = L * scale; // deck width in px
+  const dH = W * scale; // deck height in px
+  const ox = (SVG_W - dW) / 2; // x offset
+  const oy = (SVG_H - dH) / 2; // y offset
+
+  // ── Background deck fill ──
+  const deckRect = ns('rect', {
+    x: ox, y: oy, width: dW, height: dH,
+    fill: 'rgba(200,168,75,0.08)', stroke: '#c8a84b', 'stroke-width': 2, rx: 1
+  });
+  svg.appendChild(deckRect);
+
+  // ── Decking boards (horizontal lines) — show from step 4 ──
+  if (state.deckProfile) {
+    const boardWidthPx = 0.143 * scale;
+    const gapPx = 0.003 * scale;
+    const totalPx = boardWidthPx + gapPx;
+    let by = oy;
+    while (by < oy + dH) {
+      const board = ns('rect', {
+        x: ox + 1, y: by + 1,
+        width: dW - 2, height: Math.min(boardWidthPx - 1, oy + dH - by - 1),
+        fill: 'rgba(200,168,75,0.3)', stroke: 'none'
+      });
+      svg.appendChild(board);
+      by += totalPx;
+    }
+    document.getElementById('leg-boards').style.display = 'flex';
+  } else {
+    document.getElementById('leg-boards').style.display = 'none';
+  }
+
+  // ── Joist lines (vertical dashed) — show from step 3 ──
+  if (state.framing && state.framing !== 'timber') {
+    const jSpacingM = 0.45;
+    const jSpacingPx = jSpacingM * scale;
+    // Draw joist lines
+    let jx = ox;
+    while (jx <= ox + dW) {
+      const joist = ns('line', {
+        x1: jx, y1: oy, x2: jx, y2: oy + dH,
+        stroke: '#3d8a7d', 'stroke-width': 1,
+        'stroke-dasharray': '4,3', opacity: 0.7
+      });
+      svg.appendChild(joist);
+      jx += jSpacingPx;
+    }
+    document.getElementById('leg-joists').style.display = 'flex';
+
+    // ── Bearer lines (horizontal dashed) — show if bearer+joist ──
+    if (state.framingLayout === 'bearer') {
+      const spans = (window.SPANS || {})[state.framing]?.[state.framingProfile];
+      const bearerSpanM = spans ? spans.bearerSpan : 1.1;
+      const bSpacingPx = bearerSpanM * scale;
+      let by2 = oy;
+      while (by2 <= oy + dH) {
+        const bearer = ns('line', {
+          x1: ox, y1: by2, x2: ox + dW, y2: by2,
+          stroke: '#1a5c52', 'stroke-width': 1.5,
+          'stroke-dasharray': '6,3', opacity: 0.8
+        });
+        svg.appendChild(bearer);
+        by2 += bSpacingPx;
+      }
+      document.getElementById('leg-bearers').style.display = 'flex';
+    } else {
+      document.getElementById('leg-bearers').style.display = 'none';
+    }
+  } else {
+    document.getElementById('leg-joists').style.display = 'none';
+    document.getElementById('leg-bearers').style.display = 'none';
+  }
+
+  // ── Picture frame border ──
+  const pfThicknessPx = Math.max(3, 0.14 * scale);
+  if (state.pictureFrame === 'square') {
+    // 2 short sides (left & right)
+    [ox, ox + dW - pfThicknessPx].forEach(fx => {
+      svg.appendChild(ns('rect', {x: fx, y: oy, width: pfThicknessPx, height: dH, fill: '#8a6a20', opacity: 0.7}));
+    });
+    document.getElementById('leg-frame').style.display = 'flex';
+  } else if (state.pictureFrame === 'three') {
+    // 3 sides — left, right, bottom
+    [[ox, oy, pfThicknessPx, dH],
+     [ox + dW - pfThicknessPx, oy, pfThicknessPx, dH],
+     [ox, oy + dH - pfThicknessPx, dW, pfThicknessPx]].forEach(([x,y,w,h]) => {
+      svg.appendChild(ns('rect', {x, y, width: w, height: h, fill: '#8a6a20', opacity: 0.7}));
+    });
+    document.getElementById('leg-frame').style.display = 'flex';
+  } else if (state.pictureFrame === 'four') {
+    // Full perimeter
+    [[ox, oy, dW, pfThicknessPx],
+     [ox, oy + dH - pfThicknessPx, dW, pfThicknessPx],
+     [ox, oy, pfThicknessPx, dH],
+     [ox + dW - pfThicknessPx, oy, pfThicknessPx, dH]].forEach(([x,y,w,h]) => {
+      svg.appendChild(ns('rect', {x, y, width: w, height: h, fill: '#8a6a20', opacity: 0.7}));
+    });
+    document.getElementById('leg-frame').style.display = 'flex';
+  } else {
+    document.getElementById('leg-frame').style.display = 'none';
+  }
+
+  // ── Stairs ──
+  if (state.stairs === 'yes' && state.stepsCount > 0) {
+    const stairW = Math.min(1.2 * scale, dW * 0.4);
+    const stepDepth = 0.28 * scale;
+    const stairX = ox + (dW - stairW) / 2;
+    const stairStartY = oy + dH;
+    for (let s = 0; s < Math.min(state.stepsCount, 5); s++) {
+      const narrowing = s * (stairW * 0.04);
+      svg.appendChild(ns('rect', {
+        x: stairX + narrowing / 2,
+        y: stairStartY + s * stepDepth,
+        width: stairW - narrowing,
+        height: stepDepth - 1,
+        fill: '#e8e0d0', stroke: '#bbb', 'stroke-width': 0.5, rx: 1
+      }));
+    }
+    if (state.stepsCount > 5) {
+      const t = ns('text', {
+        x: ox + dW / 2, y: stairStartY + 5 * stepDepth + 12,
+        'text-anchor': 'middle', 'font-family': 'Barlow,sans-serif',
+        'font-size': '9', fill: '#999'
+      });
+      t.textContent = `+${state.stepsCount - 5} more steps`;
+      svg.appendChild(t);
+    }
+    document.getElementById('leg-stairs').style.display = 'flex';
+  } else {
+    document.getElementById('leg-stairs').style.display = 'none';
+  }
+
+  // ── Dimension labels ──
+  // Length arrow (top)
+  const arrY = oy - 14;
+  const arrAttrs = {stroke: '#666', 'stroke-width': 1, fill: 'none'};
+  svg.appendChild(ns('line', {x1: ox, y1: arrY, x2: ox + dW, y2: arrY, ...arrAttrs}));
+  svg.appendChild(ns('line', {x1: ox, y1: arrY - 4, x2: ox, y2: arrY + 4, ...arrAttrs}));
+  svg.appendChild(ns('line', {x1: ox + dW, y1: arrY - 4, x2: ox + dW, y2: arrY + 4, ...arrAttrs}));
+  const lenLabel = ns('text', {x: ox + dW / 2, y: arrY - 3, 'text-anchor': 'middle', 'font-family': 'Barlow,sans-serif', 'font-size': '10', fill: '#555'});
+  lenLabel.textContent = L + 'm';
+  svg.appendChild(lenLabel);
+
+  // Width arrow (right)
+  const arrX2 = ox + dW + 14;
+  svg.appendChild(ns('line', {x1: arrX2, y1: oy, x2: arrX2, y2: oy + dH, ...arrAttrs}));
+  svg.appendChild(ns('line', {x1: arrX2 - 4, y1: oy, x2: arrX2 + 4, y2: oy, ...arrAttrs}));
+  svg.appendChild(ns('line', {x1: arrX2 - 4, y1: oy + dH, x2: arrX2 + 4, y2: oy + dH, ...arrAttrs}));
+  const widLabel = ns('text', {x: arrX2 + 4, y: oy + dH / 2, 'text-anchor': 'start', 'font-family': 'Barlow,sans-serif', 'font-size': '10', fill: '#555', transform: `rotate(90,${arrX2 + 4},${oy + dH / 2})`});
+  widLabel.textContent = W + 'm';
+  svg.appendChild(widLabel);
+
+  // ── Update legend and dims ──
+  document.getElementById('previewLegend').style.display = 'flex';
+  document.getElementById('previewDims').style.display = 'flex';
+  document.getElementById('dimLabel').textContent = L + 'm × ' + W + 'm';
+  document.getElementById('areaLabel').textContent = (L * W).toFixed(1) + 'm²';
+  document.getElementById('previewLabel').textContent = (L * W).toFixed(1) + 'm²';
+
+  // Expose SPANS for preview
+  
+}
+
 </script>
 </body>
 </html>
