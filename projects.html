@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Recent Projects — ShadowDeck™</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -53,8 +55,10 @@ nav a:hover,nav a.active{color:#fff;border-bottom-color:#c8a84b}
 .project-meta{margin-bottom:2rem}
 .project-eyebrow{color:#c8a84b;font-family:'Barlow Condensed',sans-serif;font-weight:600;text-transform:uppercase;letter-spacing:3px;font-size:.85rem;margin-bottom:8px}
 .project h2{font-family:'Barlow Condensed',sans-serif;font-size:2rem;font-weight:700;color:var(--ink);margin-bottom:12px}
-.project p{font-size:1rem;color:#3a4f4a;max-width:680px;line-height:1.7}
-.project-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+
+.project-header{display:flex;justify-content:space-between;align-items:flex-start;gap:2rem;margin-bottom:1.25rem;flex-wrap:wrap}
+.project-desc{font-size:1rem;color:#3a4f4a;line-height:1.75;margin-bottom:2rem;max-width:860px}
+.project-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
 .tag{font-size:12px;font-weight:600;padding:4px 12px;border:1px solid var(--border);border-radius:20px;color:#5a6b68;font-family:'Barlow Condensed',sans-serif;letter-spacing:.5px;text-transform:uppercase}
 .photo-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:2rem}
 .photo-grid img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:4px;transition:.3s}
@@ -143,10 +147,11 @@ footer a{color:#b8a070;transition:.2s}footer a:hover{color:#c8a84b}
 
   <!-- PROJECT 1 -->
   <div class="project">
-    <div class="project-meta">
-      <div class="project-eyebrow">Auckland, New Zealand</div>
-      <h2>The Metropolis, Auckland</h2>
-      <p>A rooftop decking installation at The Metropolis, one of Auckland's most recognised apartment buildings. ShadowDeck™ Kwila timber decking was installed over SuperSpan aluminium framing and Nurajack pedestals, delivering a sleek nail-free finish suited to the building's premium specification. The system's low profile and membrane-safe pedestal design made it ideal for this high-rise rooftop application.</p>
+    <div class="project-header">
+      <div>
+        <div class="project-eyebrow">Auckland, New Zealand</div>
+        <h2>The Metropolis, Auckland</h2>
+      </div>
       <div class="project-tags">
         <span class="tag">Rooftop deck</span>
         <span class="tag">Nurajack pedestals</span>
@@ -154,20 +159,22 @@ footer a{color:#b8a070;transition:.2s}footer a:hover{color:#c8a84b}
         <span class="tag">Kwila timber</span>
       </div>
     </div>
+    <p class="project-desc">A rooftop decking installation at The Metropolis, one of Auckland's most recognised apartment buildings. ShadowDeck™ Kwila timber decking was installed over SuperSpan aluminium framing and Nurajack pedestals, delivering a sleek nail-free finish suited to the building's premium specification. The system's low profile and membrane-safe pedestal design made it ideal for this high-rise rooftop application.</p>
     <div class="photo-grid">
-      <img src="images/IMG_8671.jpeg" alt="The Metropolis Auckland deck project" loading="lazy" onerror="this.style.background='#d8cdbd';this.style.minHeight='200px'">
-      <img src="images/IMG_8673.jpeg" alt="The Metropolis Auckland deck detail" loading="lazy" onerror="this.style.background='#d8cdbd';this.style.minHeight='200px'">
-      <img src="images/IMG_8681.jpeg" alt="The Metropolis Auckland deck boards" loading="lazy" onerror="this.style.background='#d8cdbd';this.style.minHeight='200px'">
-      <img src="images/IMG_8654.jpeg" alt="The Metropolis Auckland deck overview" loading="lazy" onerror="this.style.background='#d8cdbd';this.style.minHeight='200px'">
+      <img src="images/IMG_8671.jpeg" alt="The Metropolis Auckland deck project" loading="lazy" onerror="this.style.background='#d8cdbd';this.style.minHeight='220px'">
+      <img src="images/IMG_8673.jpeg" alt="The Metropolis Auckland deck detail" loading="lazy" onerror="this.style.background='#d8cdbd';this.style.minHeight='220px'">
+      <img src="images/IMG_8681.jpeg" alt="The Metropolis Auckland deck boards" loading="lazy" onerror="this.style.background='#d8cdbd';this.style.minHeight='220px'">
+      <img src="images/IMG_8654.jpeg" alt="The Metropolis Auckland deck overview" loading="lazy" onerror="this.style.background='#d8cdbd';this.style.minHeight='220px'">
     </div>
   </div>
 
   <!-- PROJECT 2 -->
   <div class="project">
-    <div class="project-meta">
-      <div class="project-eyebrow">St Johns, Auckland</div>
-      <h2>Glover Road, St Johns</h2>
-      <p>A residential deck build in St Johns, Auckland. The ShadowDeck™ system was used to create a seamless outdoor living area, with hidden fasteners ensuring a clean, nail-free surface that's comfortable underfoot and built to last. The natural Kwila hardwood finish complements the home's architecture while providing exceptional durability in New Zealand's variable climate.</p>
+    <div class="project-header">
+      <div>
+        <div class="project-eyebrow">St Johns, Auckland</div>
+        <h2>Glover Road, St Johns</h2>
+      </div>
       <div class="project-tags">
         <span class="tag">Residential</span>
         <span class="tag">Outdoor living</span>
@@ -175,20 +182,22 @@ footer a{color:#b8a070;transition:.2s}footer a:hover{color:#c8a84b}
         <span class="tag">Hidden fasteners</span>
       </div>
     </div>
-    <div class="photo-grid wide">
-      <img src="images/IMG_2088.jpeg" alt="Glover Road St Johns deck project" loading="lazy" onerror="this.style.background='#d8cdbd';this.style.minHeight='200px'">
-      <img src="images/IMG_2092.jpeg" alt="Glover Road deck detail" loading="lazy" onerror="this.style.background='#d8cdbd';this.style.minHeight='200px'">
-      <img src="images/IMG_2091.jpeg" alt="Glover Road deck boards" loading="lazy" onerror="this.style.background='#d8cdbd';this.style.minHeight='200px'">
-      <img src="images/IMG_2090.jpeg" alt="Glover Road deck overview" loading="lazy" onerror="this.style.background='#d8cdbd';this.style.minHeight='200px'">
+    <p class="project-desc">A residential deck build in St Johns, Auckland. The ShadowDeck™ system was used to create a seamless outdoor living area, with hidden fasteners ensuring a clean, nail-free surface that's comfortable underfoot and built to last. The natural Kwila hardwood finish complements the home's architecture while providing exceptional durability in New Zealand's variable climate.</p>
+    <div class="photo-grid">
+      <img src="images/IMG_2088.jpg" alt="Glover Road St Johns deck project" loading="lazy" onerror="this.style.background='#d8cdbd';this.style.minHeight='220px'">
+      <img src="images/IMG_2092.jpg" alt="Glover Road deck detail" loading="lazy" onerror="this.style.background='#d8cdbd';this.style.minHeight='220px'">
+      <img src="images/IMG_2091.jpg" alt="Glover Road deck boards" loading="lazy" onerror="this.style.background='#d8cdbd';this.style.minHeight='220px'">
+      <img src="images/IMG_2090.jpg" alt="Glover Road deck overview" loading="lazy" onerror="this.style.background='#d8cdbd';this.style.minHeight='220px'">
     </div>
   </div>
 
   <!-- PROJECT 3 -->
   <div class="project">
-    <div class="project-meta">
-      <div class="project-eyebrow">Freemans Bay, Auckland</div>
-      <h2>Beaumont Quarter, Freemans Bay</h2>
-      <p>A deck installation at Beaumont Quarter in Auckland's Freemans Bay. The project used the ShadowDeck™ SuperSpan aluminium sub-framing system over a waterproof membrane, with Nurajack pedestals providing precise height adjustment and membrane protection. The result is a high-quality timber deck with a refined picture-frame finish suited to this contemporary urban setting.</p>
+    <div class="project-header">
+      <div>
+        <div class="project-eyebrow">Freemans Bay, Auckland</div>
+        <h2>Beaumont Quarter, Freemans Bay</h2>
+      </div>
       <div class="project-tags">
         <span class="tag">Over membrane</span>
         <span class="tag">Nurajack pedestals</span>
@@ -196,11 +205,12 @@ footer a{color:#b8a070;transition:.2s}footer a:hover{color:#c8a84b}
         <span class="tag">Urban residential</span>
       </div>
     </div>
+    <p class="project-desc">A deck installation at Beaumont Quarter in Auckland's Freemans Bay. The project used the ShadowDeck™ SuperSpan aluminium sub-framing system over a waterproof membrane, with Nurajack pedestals providing precise height adjustment and membrane protection. The result is a high-quality timber deck with a refined picture-frame finish suited to this contemporary urban setting.</p>
     <div class="photo-grid">
-      <img src="images/IMG_6744.jpeg" alt="Beaumont Quarter deck project" loading="lazy" onerror="this.style.background='#d8cdbd';this.style.minHeight='200px'">
-      <img src="images/IMG_6745.jpeg" alt="Beaumont Quarter deck detail" loading="lazy" onerror="this.style.background='#d8cdbd';this.style.minHeight='200px'">
-      <img src="images/IMG_6751.jpeg" alt="Beaumont Quarter deck boards" loading="lazy" onerror="this.style.background='#d8cdbd';this.style.minHeight='200px'">
-      <img src="images/IMG_6752.jpeg" alt="Beaumont Quarter deck overview" loading="lazy" onerror="this.style.background='#d8cdbd';this.style.minHeight='200px'">
+      <img src="images/IMG_6744.jpeg" alt="Beaumont Quarter deck project" loading="lazy" onerror="this.style.background='#d8cdbd';this.style.minHeight='220px'">
+      <img src="images/IMG_6745.jpeg" alt="Beaumont Quarter deck detail" loading="lazy" onerror="this.style.background='#d8cdbd';this.style.minHeight='220px'">
+      <img src="images/IMG_6751.jpeg" alt="Beaumont Quarter deck boards" loading="lazy" onerror="this.style.background='#d8cdbd';this.style.minHeight='220px'">
+      <img src="images/IMG_6752.jpeg" alt="Beaumont Quarter deck overview" loading="lazy" onerror="this.style.background='#d8cdbd';this.style.minHeight='220px'">
     </div>
   </div>
 
