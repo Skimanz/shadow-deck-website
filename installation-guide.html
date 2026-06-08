@@ -34,20 +34,48 @@ a{color:inherit;text-decoration:none}
 
 /* nav */
 header{position:sticky;top:0;z-index:1000;background:var(--ink-2)}
-.topbar{display:flex;align-items:center;justify-content:space-between;padding:12px 24px;max-width:1380px;margin:0 auto;gap:16px;flex-wrap:nowrap}
-.brand{display:flex;flex-direction:column;line-height:1;flex-shrink:0}
+.topbar-upper{display:flex;align-items:center;justify-content:flex-end;padding:7px 24px;border-bottom:1px solid rgba(255,255,255,.08);gap:16px}
+.topbar-upper a{color:var(--teal-2);font-family:'Barlow Condensed',sans-serif;font-weight:500;font-size:.88rem;letter-spacing:.5px;transition:.2s;text-decoration:none;white-space:nowrap}
+.topbar-upper a:hover{color:#fff}
+.topbar-upper .sep{color:rgba(255,255,255,.25);font-size:.8rem}
+.btn-deck{border:1.5px solid #c8a84b;color:#c8a84b;background:transparent;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.85rem;letter-spacing:1.5px;text-transform:uppercase;padding:6px 18px;border-radius:3px;cursor:pointer;transition:.2s;text-decoration:none;white-space:nowrap;display:inline-block}
+.btn-deck:hover{background:#c8a84b;color:#0d2420}
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:10px 24px;gap:16px}
+.brand{display:flex;flex-direction:column;line-height:1;flex-shrink:0;text-decoration:none}
 .brand img{height:28px;width:auto}
 .brand .logo-txt{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.7rem;color:#fff;letter-spacing:1px}
 .brand small{color:#fff;font-size:.65rem;letter-spacing:2px;text-transform:uppercase;margin-top:2px}
 nav{flex:1;display:flex;justify-content:center}
-nav ul{list-style:none;display:flex;gap:20px;align-items:center}
-nav a{color:#d4e8e4;font-family:'Barlow Condensed',sans-serif;font-weight:500;text-transform:uppercase;letter-spacing:.8px;font-size:.95rem;transition:.2s;padding:6px 0;border-bottom:2px solid transparent;white-space:nowrap}
-nav a:hover,nav a.active{color:#fff;border-bottom-color:var(--teal)}
-.nav-cta{display:flex;align-items:center;gap:14px;flex-shrink:0}
-.nav-phone{color:var(--teal-2);font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:1rem;white-space:nowrap;transition:.2s}
-.nav-phone:hover{color:#fff}
+nav>ul{list-style:none;display:flex;gap:2px;align-items:center;margin:0;padding:0}
+nav a{color:#d4e8e4;font-family:'Barlow Condensed',sans-serif;font-weight:500;text-transform:uppercase;letter-spacing:.8px;font-size:.95rem;transition:.2s;padding:8px 12px;border-bottom:2px solid transparent;white-space:nowrap;display:block;text-decoration:none}
+nav a:hover,nav a.active{color:#fff;border-bottom-color:#3d8a7d}
+.has-drop{position:relative}
+.has-drop>a::after{content:' v';font-size:.7rem;opacity:.6}
+.drop{display:none;position:absolute;top:calc(100% + 4px);left:0;background:#0d2420;border:1px solid rgba(255,255,255,.12);border-radius:4px;min-width:230px;padding:6px 0;z-index:300;box-shadow:0 8px 28px rgba(0,0,0,.35)}
+.has-drop:hover .drop{display:block}
+.drop li{list-style:none}
+.drop a{padding:10px 20px;font-size:.88rem;letter-spacing:.5px;border-bottom:none;color:#b8d4cf;text-transform:none;font-weight:400}
+.drop a:hover{background:rgba(255,255,255,.07);color:#fff;border-bottom:none}
+.drop a.disabled{opacity:.38;pointer-events:none;cursor:not-allowed;font-style:italic}
 .burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px}
 .burger span{width:26px;height:2px;background:#fff;transition:.3s}
+@media(max-width:960px){
+  .topbar-upper .sep{display:none}
+  .topbar-upper a:not(.btn-deck){display:none}
+  nav>ul{display:none;position:absolute;top:100%;left:0;right:0;background:#0d2420;flex-direction:column;gap:0;padding:8px 0;border-top:1px solid rgba(255,255,255,.1)}
+  nav>ul.open{display:flex}
+  nav{justify-content:flex-end}
+  nav li{width:100%}
+  nav>ul>li>a{display:block;padding:13px 20px;border-bottom:1px solid rgba(255,255,255,.07)}
+  .has-drop>a::after{float:right}
+  .drop{display:none;position:static;background:rgba(0,0,0,.25);border:none;border-radius:0;box-shadow:none;padding:0;min-width:unset}
+  .has-drop.mob-open .drop{display:block}
+  .drop a{padding:11px 34px;font-size:.88rem;border-bottom:1px solid rgba(255,255,255,.05)}
+  .burger{display:flex}
+  h2.title{font-size:2rem}
+  footer .cols{grid-template-columns:1fr;gap:24px}
+  section{padding:56px 0}
+}
 
 /* sections */
 section{padding:80px 0}
@@ -148,6 +176,13 @@ footer .copy{border-top:1px solid rgba(255,255,255,.1);padding-top:22px;text-ali
 </head>
 <body>
 <header>
+<div class="topbar-upper">
+  <a href="tel:0800742369">&#128222;&nbsp;0800 742 369</a>
+  <span class="sep">|</span>
+  <a href="mailto:info@shadowdeck.co.nz">info@shadowdeck.co.nz</a>
+  <span class="sep">|</span>
+  <a href="quote.html" class="btn-deck">Deck Builder</a>
+</div>
 <div class="topbar">
   <a href="index.html" class="brand">
     <img src="images/shadowdeck-logo-white.png" alt="ShadowDeck" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
@@ -155,44 +190,39 @@ footer .copy{border-top:1px solid rgba(255,255,255,.1);padding-top:22px;text-ali
     <small>Nail Free Timber Decking System</small>
   </a>
   <nav>
-    <button class="burger" aria-label="Menu" onclick="document.getElementById('m').classList.toggle('open')">
+    <button class="burger" aria-label="Menu" onclick="toggleMobileMenu()">
       <span></span><span></span><span></span>
     </button>
-    <ul id="m"><li><a href="about.html">About</a></li><li><a href="products.html">Our Products</a></li><li><a href="frame.html">Aluminium Framing</a></li><li><a href="installation-guide.html" class="active">Installation Guide</a></li><li><a href="contact.html">Contact Us</a></li></ul>
+    <ul id="m">
+      <li><a href="index.html" >Home</a></li>
+      <li class="has-drop">
+        <a href="products.html" >Products</a>
+        <ul class="drop">
+          <li><a href="products.html">Nail-Free Timber Decking</a></li>
+          <li><a href="frame.html">Aluminium Sub-Framing</a></li>
+        </ul>
+      </li>
+      <li class="has-drop">
+        <a href="installation-guide.html" class="active">Installation Guides</a>
+        <ul class="drop">
+          <li><a href="installation-guide.html">Timber Decking Guide</a></li>
+          <li><a href="#" class="disabled">Aluminium Guide <em>(coming soon)</em></a></li>
+        </ul>
+      </li>
+      <li class="has-drop">
+        <a href="#" >Resources</a>
+        <ul class="drop">
+          <li><a href="resources/superspan-span-tables.pdf" target="_blank">SuperSpan Span Tables</a></li>
+          <li><a href="resources/ps1-certificate.pdf" target="_blank">PS1 Engineering Certificate</a></li>
+        </ul>
+      </li>
+      <li><a href="about.html" >About</a></li>
+      <li><a href="contact.html" >Contact</a></li>
+    </ul>
   </nav>
-  <div class="nav-cta">
-    <a href="tel:0800742369" class="nav-phone">0800 742 369</a> <span style="color:rgba(255,255,255,.3)">|</span> <a href="mailto:info@shadowdeck.co.nz" class="nav-phone" style="font-size:.85rem">info@shadowdeck.co.nz</a>
-    <button class="btn" onclick="document.getElementById('quote-modal').classList.add('open')" style="font-size:.88rem;padding:10px 20px">Request Quote</button>
-  </div>
 </div>
 </header>
-<div class="modal-overlay" id="quote-modal" onclick="if(event.target===this)this.classList.remove('open')">  
-  <div class="modal-box">
-    <button class="modal-close" onclick="document.getElementById('quote-modal').classList.remove('open')">&times;</button>
-    <h3>Request a Quote</h3>
-    <form action="https://formspree.io/f/mqeoeddl" method="POST">
-      <label>Your Name <span class="req">*</span></label>
-      <input type="text" name="name" required>
-      <label>Your Phone <span class="req">*</span></label>
-      <input type="tel" name="phone" required>
-      <label>Your Email <span class="req">*</span></label>
-      <input type="email" name="email" required>
-      <label>Deck Size</label>
-      <input type="text" name="deck_size" placeholder="e.g. 4m x 3m">
-      <label>Preferred Contact Method</label>
-      <select name="contact_preference" style="width:100%;padding:11px 13px;border:1px solid #d0dbd8;border-radius:3px;font-family:Barlow,sans-serif;font-size:.98rem;background:#fafcfb">
-        <option value="">Select...</option>
-        <option value="Phone">Phone</option>
-        <option value="Text">Text</option>
-        <option value="Email">Email</option>
-      </select>
-      <label>Notes / Further Info</label>
-      <textarea name="notes" style="width:100%;padding:11px 13px;border:1px solid #d0dbd8;border-radius:3px;font-family:Barlow,sans-serif;font-size:.98rem;min-height:90px;resize:vertical"></textarea>
-      <input type="hidden" name="_subject" value="Quote Request - ShadowDeck">
-      <button type="submit" class="btn" style="width:100%;margin-top:20px">Submit Request</button>
-    </form>
-  </div>
-</div>
+
 
 <section class="pagehero" style="background-image:url('images/IMG_3538.jpg')">
   <div class="wrap"><div class="eyebrow">ShadowDeck<sup class="tm">™</sup></div><h1>Installation Guide</h1></div>

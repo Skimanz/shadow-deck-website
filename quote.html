@@ -1022,5 +1022,13 @@ async function handleSubmit(e){
   } catch(err){ alert('Something went wrong. Please call 0800 742 369.'); }
 }
 </script>
+<script>
+function toggleMobileMenu(){document.getElementById("m").classList.toggle("open");}
+document.querySelectorAll(".has-drop > a").forEach(function(a){
+  a.addEventListener("click",function(e){
+    if(window.innerWidth<=960){e.preventDefault();this.parentElement.classList.toggle("mob-open");}
+  });
+});
+</script>
 </body>
 </html>
